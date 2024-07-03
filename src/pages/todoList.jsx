@@ -6,6 +6,15 @@ import axios from "axios";
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
 
+  const handleEditTodo = async(todoId)=>{
+    try {
+      await axios.patch(`${import.meta.env.VITE_BASE_URL}/todos/${todoId}`);
+      
+    } catch (error) {
+      console.error("Error Updating todo:", error);
+    }
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -25,12 +34,12 @@ const TodoList = () => {
         <h2 className="text-xl sm:text-2xl md:4xl text-center py-5 font-semibold">
           Todo List
         </h2>
-        <div className="bg-gray-100">
+        <div className="">
           <TodoForm setTodos={setTodos} />
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 w-11/12 mx-auto">
           {todos.map((todo) => (
-            <TodoCard key={todo._id} id={todo._id} todo={todo} todos={todos} setTodos={setTodos} />
+            <TodoCard key={todo._id} todo={todo} todos={todos} setTodos={setTodos} />
           ))}
         </div>
       </section>

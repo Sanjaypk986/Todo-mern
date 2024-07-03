@@ -4,13 +4,15 @@
 
 body{
   padding-top: 100px;
+ 
 }
 h1 {
   color: #333; 
   padding: 20px; 
   max-width: 800px;
   letter-spacing: 2px;
-  line-height: 2;
+  font-family: 'poppins';
+
 }
 main{
   min-height: 80vh;
