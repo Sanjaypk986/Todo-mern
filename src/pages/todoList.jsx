@@ -1,9 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TodoForm from "../components/todoForm/todoForm";
 import TodoCard from "../components/todoCard/todoCard";
+import axios from "axios";
 
 const TodoList = () => {
-  const [todo, setTodo] = useState([]);
+  const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/todos`);
+        setTodos(response.data);
+      } catch (error) {
+        console.error("Error fetching todos:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <main>
       <section className="container mx-auto my-4">
@@ -11,13 +26,11 @@ const TodoList = () => {
           Todo List
         </h2>
         <div className="bg-gray-100">
-          <TodoForm setTodo={setTodo} />
+          <TodoForm setTodos={setTodos} />
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-        {todo &&
-          todo.map((data, index) => (
-              <TodoCard key={index} index={index} data={data} todo={todo} setTodo={setTodo} />
-
+          {todos.map((todo) => (
+            <TodoCard key={todo._id} id={todo._id} todo={todo} todos={todos} setTodos={setTodos} />
           ))}
         </div>
       </section>

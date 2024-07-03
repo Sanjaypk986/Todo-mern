@@ -1,9 +1,8 @@
-import React, { useRef } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 
-export default function TodoForm({ setTodo }) {
-  
+export default function TodoForm({ setTodos }) {
   const {
     register,
     handleSubmit,
@@ -13,14 +12,12 @@ export default function TodoForm({ setTodo }) {
 
   const onSubmit = async (data) => {
     try {
-      // call add todos url and set state.
-      await axios.post(`${import.meta.env.VITE_BASE_URL}/todos`, data);
-      setTodo((previousTodo) => [
-        ...previousTodo,
-        data.todo
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/todos`, data);
+      setTodos((previousTodos) => [
+        ...previousTodos,
+        response.data // Assuming response.data contains the new todo item
       ]);
       reset(); // Reset the form fields after successful submission
-      console.log(data);
     } catch (error) {
       console.error("Error adding todo:", error);
     }
