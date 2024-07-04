@@ -11,9 +11,28 @@ h1 {
   padding: 20px; 
   max-width: 800px;
   letter-spacing: 2px;
-  font-family: 'poppins';
-
+  line-height: 1.2 !important;
+  font-family: 'Poppins' 'sans-serif';
+}
+.home-p{
+  color: #222222c0;
+  max-width: 600px;
+  font-family: 'Roboto' 'sans-serif';
 }
 main{
   min-height: 80vh;
+}
+.primary{
+  background-color: #DE4331;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: white;
+  transition: all .2s ease-in-out;
+  white-space: nowrap;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+}
+
+.primary:hover{
+  background-color: #cf2e1c;
 }

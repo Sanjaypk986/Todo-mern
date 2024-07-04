@@ -10,6 +10,7 @@ import Home from './pages/home';
 import About from './pages/about';
 import TodoList from './pages/todoList';
 import './index.css'
+import Account from './pages/account';
 
 
 const router = createBrowserRouter([
@@ -30,6 +31,11 @@ const router = createBrowserRouter([
         path: "/todolist",
         element: <TodoList />,
       },
+      {
+        path: "/account",
+        element: <Account />,
+      },
+
     ],
   },
 ]);
