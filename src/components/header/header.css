@@ -1,5 +1,5 @@
 span{
-    color: #DE4331;
+    color: #EA5E48;
 }
 .nav-links{
     font-size: 1rem;
@@ -13,7 +13,7 @@ span{
     border-radius: 5px;
 }
 .nav-links-account{
-    background-color: #DE4331;
+    background-color: #EA5E48;
     padding: 8px 20px;
     border-radius: 8px;
     font-size: 1rem;
@@ -24,7 +24,7 @@ span{
     margin-left: 10px;
 }
 .nav-links-account:hover{
-    background-color: #cf2e1c;
+    background-color: #DE4331;
 }
 i{
     padding-right: 10px;
