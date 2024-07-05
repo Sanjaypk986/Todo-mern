@@ -20,7 +20,7 @@ const Account = () => {
                 <>
                 <div className="flex flex-col justify-center col-span-1 items-center py-8 bg-white min-h-[250px] md:min-h-[350px]"> {/* Set a minimum height here */}
             <h3 className="text-xl sm:text-3xl md:text-4xl font-bold my-3">Signup</h3>
-            <SignupForm />
+            <SignupForm setUser={setUser}/>
           </div>
           <div className="account-right col-span-1 flex flex-col justify-center items-center py-8 px-4 text-center min-h-[250px] md:min-h-[350px]"> {/* Set a minimum height here */}
             <h3 className="text-xl sm:text-3xl md:text-4xl text-white font-bold mb-6">Hello, Friend!</h3>
@@ -51,7 +51,7 @@ const Account = () => {
           </div>
           <div className="flex flex-col justify-center col-span-1 items-center py-8 bg-white min-h-[250px] md:min-h-[350px]"> {/* Set a minimum height here */}
             <h3 className="text-xl sm:text-3xl md:text-4xl font-bold my-3">Login</h3>
-            <LoginForm />
+            <LoginForm/>
           </div>
                 </>
             )

@@ -6,15 +6,6 @@ import axios from "axios";
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
 
-  const handleEditTodo = async(todoId)=>{
-    try {
-      await axios.patch(`${import.meta.env.VITE_BASE_URL}/todos/${todoId}`);
-      
-    } catch (error) {
-      console.error("Error Updating todo:", error);
-    }
-  }
-
   useEffect(() => {
     const fetchData = async () => {
       try {

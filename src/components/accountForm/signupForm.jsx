@@ -1,7 +1,8 @@
+import axios from "axios";
 import React from "react";
 import { useForm } from "react-hook-form";
 
-export default function SignupForm() {
+export default function SignupForm({setUser}) {
   const {
     register,
     handleSubmit,
@@ -10,7 +11,13 @@ export default function SignupForm() {
   } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data);
+    try {
+        const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users`, data);
+        setUser(false)
+      } catch (error) {
+        console.error("Error creating user:", error);
+      }
+    
   };
 
   return (
@@ -26,6 +33,7 @@ export default function SignupForm() {
       {errors.name && <span className="text-red-500">{errors.name.message}</span>}
       <input
         {...register("email", { required: "This field is required", pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/ })}
+        type="email"
         placeholder="Email Id"
         className="w-3/4 text-md shadow-sm px-4 py-2 border-2 bg-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent"
       />
@@ -35,6 +43,7 @@ export default function SignupForm() {
           required: "This field is required",
           pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
         })}
+        type="password"
         placeholder="Password"
         className="w-3/4 text-md shadow-sm px-4 py-2 border-2 bg-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent"
       />
