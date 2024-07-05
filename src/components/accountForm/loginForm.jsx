@@ -14,7 +14,7 @@ export default function LoginForm() {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users`, data);
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/auth/login`, data,{withCredentials:true});
       console.log("User created successfully:", response.data);
       navigate('/todolist')
     } catch (error) {
@@ -33,7 +33,7 @@ export default function LoginForm() {
         placeholder="Email Id"
         className="w-3/4 text-md shadow-sm px-4 py-2 border-2 bg-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent"
       />
-      {errors.email && <span className="text-red-500">Invalid Email</span>}
+      {errors.email && <span className="text-red-500">{errors.email.message}</span>}
       <input
         {...register("password", {
           required: "This field is required",

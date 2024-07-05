@@ -11,6 +11,7 @@ import About from './pages/about';
 import TodoList from './pages/todoList';
 import './index.css'
 import Account from './pages/account';
+import Logout from './pages/logout';
 
 
 const router = createBrowserRouter([
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: "/account",
         element: <Account />,
+      },
+      {
+        path: "/logout",
+        element: <Logout />,
       },
 
     ],

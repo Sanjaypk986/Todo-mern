@@ -1,10 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./header.css";
 import { MenuData } from "../../services/menuData";
 import { Link } from "react-router-dom";
+import axios from "axios";
 const Header = () => {
-
+    const[verifyLogin,setVerifyLogin] = useState(false)
     const[toggle,setToggle] = useState(false)
+    useEffect(() => {
+      const fetchData= async()=>{
+        try {
+          const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/auth/verify`,{withCredentials:true})
+          const verifyLogin = response.data.verified
+          setVerifyLogin(verifyLogin)
+          console.log(verifyLogin);
+        } catch (error) {
+          console.log(error);
+        }
+      }  
+      fetchData()
+    }, [verifyLogin])
+    
 
     function handleMenu (){
         setToggle(!toggle)
@@ -32,6 +47,11 @@ const Header = () => {
               </Link>
             </li>
           ))}
+          {verifyLogin&&
+          <Link to={'/logout'} className="nav-links mx-2">
+          Logout
+          </Link>
+          }
         </ul>
         <div className="flex items-center justify-between gap-5">
           <i className="fa-regular fa-moon text-xl md:text-2xl"></i>
