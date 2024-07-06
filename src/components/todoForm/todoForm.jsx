@@ -2,8 +2,11 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import "./todoForm.css";
+import { useDispatch } from "react-redux";
+import { addTodo } from "../../features/todo/todoSlice";
 
-export default function TodoForm({ setTodos }) {
+export default function TodoForm() {
+  const dispatch = useDispatch()
   const {
     register,
     handleSubmit,
@@ -17,10 +20,7 @@ export default function TodoForm({ setTodos }) {
         `${import.meta.env.VITE_BASE_URL}/todos`,
         data, {withCredentials:true}
       );
-      setTodos((previousTodos) => [
-        ...previousTodos,
-        response.data, // Assuming response.data contains the new todo item
-      ]);
+      dispatch(addTodo(response.data))
       reset(); // Reset the form fields after successful submission
     } catch (error) {
       console.error("Error adding todo:", error);

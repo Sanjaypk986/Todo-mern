@@ -1,8 +1,14 @@
 import axios from "axios";
 import React, { useRef, useState } from "react";
 import "./todoCard.css";
+import { format } from "date-fns";
+import { useDispatch } from "react-redux";
+import { deleteTodo, updateTodo } from "../../features/todo/todoSlice";
 
-const TodoCard = ({ todo, setTodos, todos }) => {
+const TodoCard = ({ todo }) => {
+  const dispatch = useDispatch();
+  // todo adiing date
+  const formattedDate = format(new Date(todo.createdAt), "MMMM d, yyyy");
   // for conditional render for edit
   const [edit, setEdit] = useState(false);
   // to  update the todo value
@@ -13,9 +19,11 @@ const TodoCard = ({ todo, setTodos, todos }) => {
   const handleDelete = async () => {
     alert("Deleted");
     try {
-      await axios.delete(`${import.meta.env.VITE_BASE_URL}/todos/${todo._id}` ,{withCredentials:true});
+      await axios.delete(`${import.meta.env.VITE_BASE_URL}/todos/${todo._id}`, {
+        withCredentials: true,
+      });
       // filter with id and create new array with out the same id item
-      setTodos(todos.filter((item) => item._id !== todo._id));
+      dispatch(deleteTodo(todo._id));
     } catch (error) {
       console.error("Error deleting todo:", error);
     }
@@ -42,16 +50,14 @@ const TodoCard = ({ todo, setTodos, todos }) => {
       // fetch update api and pass data as req.body
       await axios.patch(
         `${import.meta.env.VITE_BASE_URL}/todos/${todo._id}`,
-        data , {withCredentials:true}
+        data,
+        { withCredentials: true }
       );
       // settodos and map. and compare todo id with updated item
-      setTodos(
-        todos.map((item) => {
-          if (item._id === todo._id) {
-            // if condition true pass settodo with spread operator item and Update the todo text for the specific item
-            return { ...item, todo: updatedTodo };
-          }
-          return item;
+      dispatch(
+        updateTodo({
+          _id: todo._id,
+          updatedTodo,
         })
       );
     } catch (error) {
@@ -62,18 +68,19 @@ const TodoCard = ({ todo, setTodos, todos }) => {
 
   return (
     <div className="flex flex-col justify-between h-full bg-white shadow-lg rounded-lg p-4 mt-4 border border-gray-200 relative">
-      <span className="text-lg break-words font-semibold">
-        {updatedTodo}
-      </span>
-      <div className="flex justify-end items-center mt-2">
-        <i
-          className="fa-solid fa-trash cursor-pointer hover:text-red-500 mr-4"
-          onClick={handleDelete}
-        ></i>
-        <i
-          className="fa-solid fa-pen-to-square cursor-pointer hover:text-blue-500"
-          onClick={handleEditInput}
-        ></i>
+      <span className="text-lg break-words font-semibold">{updatedTodo}</span>
+      <div className="flex justify-between items-center mt-2">
+        <p className="home-p p-2 text-sm">{formattedDate}</p>
+        <div>
+          <i
+            className="fa-solid fa-trash cursor-pointer hover:text-red-500 mr-4"
+            onClick={handleDelete}
+          ></i>
+          <i
+            className="fa-solid fa-pen-to-square cursor-pointer hover:text-blue-500"
+            onClick={handleEditInput}
+          ></i>
+        </div>
       </div>
       {edit && (
         <div className="edit-box flex flex-col justify-center items-center gap-2 h-full  bg-white shadow-lg rounded-lg p-4">
