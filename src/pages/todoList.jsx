@@ -9,10 +9,14 @@ const TodoList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/todos`);
+        const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/todos`, {
+          withCredentials: true,
+        });
+
+        console.log("Response received:", response); // Add this line for debugging
         setTodos(response.data);
       } catch (error) {
-        console.error("Error fetching todos:", error);
+        console.error("Error fetching todos:", error.response); // Modify this line to log the error response
       }
     };
 

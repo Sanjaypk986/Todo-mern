@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 export default function LoginForm() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -14,19 +14,16 @@ export default function LoginForm() {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/auth/login`, data,{withCredentials:true});
-      console.log("User created successfully:", response.data);
-      navigate('/todolist')
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/auth/login`, data, { withCredentials: true });
+      console.log("User logged in successfully:", response.data);
+      navigate('/todolist');
     } catch (error) {
-      console.error("Error creating user:", error);
+      console.error("Error logging in:", error);
     }
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col justify-around items-center w-full md:w-3/4 p-3 gap-4 min-h-[300px]"
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col justify-around items-center w-full md:w-3/4 p-3 gap-4 min-h-[300px]">
       <input
         {...register("email", { required: "This field is required", pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/ })}
         type="email"

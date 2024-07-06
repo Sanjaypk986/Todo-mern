@@ -13,7 +13,7 @@ const TodoCard = ({ todo, setTodos, todos }) => {
   const handleDelete = async () => {
     alert("Deleted");
     try {
-      await axios.delete(`${import.meta.env.VITE_BASE_URL}/todos/${todo._id}`);
+      await axios.delete(`${import.meta.env.VITE_BASE_URL}/todos/${todo._id}` ,{withCredentials:true});
       // filter with id and create new array with out the same id item
       setTodos(todos.filter((item) => item._id !== todo._id));
     } catch (error) {
@@ -42,7 +42,7 @@ const TodoCard = ({ todo, setTodos, todos }) => {
       // fetch update api and pass data as req.body
       await axios.patch(
         `${import.meta.env.VITE_BASE_URL}/todos/${todo._id}`,
-        data
+        data , {withCredentials:true}
       );
       // settodos and map. and compare todo id with updated item
       setTodos(
