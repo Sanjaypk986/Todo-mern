@@ -1,9 +1,12 @@
 import axios from "axios";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { changeLogginStatus } from "../../features/login/loginSlice";
 
 export default function LoginForm() {
+  const dispatch = useDispatch()
   const navigate = useNavigate();
   const {
     register,
@@ -15,7 +18,7 @@ export default function LoginForm() {
   const onSubmit = async (data) => {
     try {
       const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/auth/login`, data, { withCredentials: true });
-      console.log("User logged in successfully:", response.data);
+      dispatch(changeLogginStatus(true))
       navigate('/todolist');
     } catch (error) {
       console.error("Error logging in:", error);

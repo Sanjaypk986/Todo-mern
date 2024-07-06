@@ -1,13 +1,17 @@
 import axios from 'axios'
 import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { changeLogginStatus } from '../features/login/loginSlice'
 
 const Logout = () => {
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     useEffect(() => {
         const fetchLogout =()=>{
             try {
                 const response = axios.get(`${import.meta.env.VITE_BASE_URL}/auth/logout`,{withCredentials:true})
+                dispatch(changeLogginStatus(false))
                 navigate('/')
             } catch (error) {
                 console.log(error);

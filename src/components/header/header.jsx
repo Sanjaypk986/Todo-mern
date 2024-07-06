@@ -3,15 +3,20 @@ import "./header.css";
 import { MenuData } from "../../services/menuData";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { changeLogginStatus } from "../../features/login/loginSlice";
 const Header = () => {
-    const[verifyLogin,setVerifyLogin] = useState(false)
+  const dispatch = useDispatch();
+  const verifyLogin = useSelector(state=>state.login.isLoggedIn)
+    // const[verifyLoginq,setVerifyLogin] = useState(false)
     const[toggle,setToggle] = useState(false)
     useEffect(() => {
       const fetchData= async()=>{
         try {
           const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/auth/verify`,{withCredentials:true})
           const verifyLogin = response.data.verified
-          setVerifyLogin(verifyLogin)
+          dispatch(changeLogginStatus(verifyLogin))
+          // setVerifyLogin(verifyLogin)
           console.log(verifyLogin);
         } catch (error) {
           console.log(error);

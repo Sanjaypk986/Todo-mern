@@ -1,7 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Home = () => {
+  const isLoggedIn = useSelector(state=>state.login.isLoggedIn)
   return (
     <main className=" flex items-center justify-center">
       <section className="container mx-auto flex flex-col justify-center items-center p-10">
@@ -12,7 +14,7 @@ const Home = () => {
           Simplify life for both you and your team. The world's #1 task manager and to-do list app.
         </p>
         <Link 
-          to={'/todolist'} 
+          to={isLoggedIn ? '/todolist': 'account'} 
           className="primary text-white py-3 px-8 rounded-md text-lg font-semibold shadow-lg transition-transform transform hover:scale-105"
         >
           Start For Free
