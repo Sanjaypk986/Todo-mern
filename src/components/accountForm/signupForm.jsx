@@ -8,6 +8,7 @@ export default function SignupForm({ setUser }) {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
     reset
   } = useForm();
 
@@ -24,6 +25,8 @@ export default function SignupForm({ setUser }) {
       console.error("Error creating user:", error);
     }
   };
+
+  const password = watch("password");
 
   return (
     <form
@@ -60,6 +63,18 @@ export default function SignupForm({ setUser }) {
         <span className="text-red-500 text-center">
           Password must be at least 8 characters long and include at least one letter, one number, and one special character
         </span>
+      )}
+      <input
+        {...register("confirmPassword", {
+          required: "This field is required",
+          validate: value => value === password || "Passwords do not match"
+        })}
+        type="password"
+        placeholder="Confirm Password"
+        className="w-3/4 text-md shadow-sm px-4 py-2 border-2 bg-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent"
+      />
+      {errors.confirmPassword && (
+        <span className="text-red-500">{errors.confirmPassword.message}</span>
       )}
       <input type="submit" value="Signup" className="submit-button py-2 px-5 rounded-lg font-semibold" />
     </form>

@@ -10,8 +10,7 @@ const Pricing = () => {
             Simplify it all with <span>Taskly</span>
           </h1>
           <p className="home-p text-base sm:text-lg md:text-xl text-center font-semibold mb-8 max-w-2xl leading-relaxed">
-            Simplify life for both you and your team. The world's #1 task
-            manager and to-do list app.
+          Choose the right plan: free for personal use, affordable upgrades for teams. Stay organized with Taskly!
           </p>
         </div>
 

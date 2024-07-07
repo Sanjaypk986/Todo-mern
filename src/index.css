@@ -17,7 +17,6 @@ h1 {
 }
 .home-p{
   color: #222222c0;
-  max-width: 600px;
   font-family: 'Poppins' 'sans-serif';
 }
 main{
@@ -77,10 +76,9 @@ h2{
   font-family: 'Poppins' 'sans-serif';
 }
 .about-images{
-  max-width: 75%;
   max-height: 500px;
 }
 p{
-  color: #333;
+  color: #4A5568;
   font-family: 'Poppins' 'sans-serif';
 }
