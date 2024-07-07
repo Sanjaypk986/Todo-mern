@@ -14,6 +14,7 @@ import TodoList from './pages/todoList';
 import './index.css'
 import Account from './pages/account';
 import Logout from './pages/logout';
+import Pricing from './pages/pricing';
 
 
 const router = createBrowserRouter([
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: "/logout",
         element: <Logout />,
+      },
+      {
+        path: "/pricing",
+        element: <Pricing />,
       },
 
     ],

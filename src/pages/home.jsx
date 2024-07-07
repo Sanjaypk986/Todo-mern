@@ -11,7 +11,7 @@ const Home = () => {
           Streamline Your Tasks, Achieve Your Goals
         </h1>
         <p className=" home-p text-base sm:text-lg md:text-xl text-center font-semibold mb-8 max-w-2xl leading-relaxed">
-          Simplify life for both you and your team. The world's #1 task manager and to-do list app.
+        Simplify life for both you and your team with Taskly, your ultimate task management solution.
         </p>
         <Link 
           to={isLoggedIn ? '/todolist': 'account'} 

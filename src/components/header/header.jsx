@@ -35,8 +35,8 @@ const Header = () => {
     <header className="p-5  border-b-2">
       <nav className="flex justify-between items-center container py-2 md:px-5  mx-auto  font-semibold ">
         <span className="whitespace-nowrap text-2xl md:text-2xl font-bold logo">
-          <Link to={'/'}>
-            <i className="fa-solid fa-clipboard-list p-1 mr-1 text-xl md:text-2xl"></i>
+          <Link to={'/'} className="tracking-wider text-3xl">
+            <i className="fa-solid fa-clipboard-list p-1 mr-1 text-xl md:text-2xl "></i>
             Taskly
           </Link>
         </span>

@@ -1,5 +1,5 @@
 span{
-    color: #EA5E48;
+    color: #de4231e3;
 }
 .nav-links{
     font-size: 1rem;
@@ -13,7 +13,7 @@ span{
     border-radius: 5px;
 }
 .nav-links-account{
-    background-color: #EA5E48;
+    background-color: #de4231e3;
     padding: 8px 20px;
     border-radius: 8px;
     font-size: 1rem;
@@ -35,9 +35,9 @@ header{
     top: 0;
     left: 50%;
     transform: translate(-50%);
-    width: 95%;
+    width: 99%;
     z-index: 99;
-    background-color: white; 
+    background-color: #FEFDFC; 
 
 }
 .fa-ellipsis-vertical{

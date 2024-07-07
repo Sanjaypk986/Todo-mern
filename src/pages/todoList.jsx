@@ -49,7 +49,7 @@ const TodoList = () => {
             </>
           ):
           <div className="w-full text-center flex flex-col justify-center items-center py-5 h-[80vh] ">
-          <p className="sm:py-4 home-p text-xl sm:text-2xl md:text-4xl text-center font-semibold mb-8 max-w-2xl leading-relaxed">Please Signup/Login to add Todos....</p>
+          <h1 className="text-3xl sm:text-5xl md:text-5xl text-center font-bold mb-6">Signup/Login to Add Todos</h1>
           <Link to={'/account'} className="nav-links-account font-semibold">Signup/Login</Link>
         </div>
         }

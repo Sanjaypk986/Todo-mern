@@ -4,7 +4,7 @@
 
 body{
   padding-top: 100px;
-
+background-color: #FEFDFC;
  
 }
 h1 {
@@ -23,12 +23,15 @@ h1 {
 main{
   min-height: 80vh;
 }
+span{
+  color: #de4231e3;
+}
 .primary{
-  background-color: #EA5E48;
+  background-color: #de4231e3;
   padding: 8px 20px;
   border-radius: 8px;
   font-size: 1rem;
-  color: white;
+  color: #fafafa;
   transition: all .2s ease-in-out;
   white-space: nowrap;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
@@ -37,17 +40,47 @@ main{
 .primary:hover{
   background-color: #DE4331;
 }
+.secondary{
+  border: 1px solid #de4231e3;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #de4231e3;
+  transition: all .2s ease-in-out;
+  white-space: nowrap;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+}
+.secondary:hover{
+  background-color: #DE4331;
+  color: #fafafa;
+}
 .account-right{
   background-image: linear-gradient( 109.6deg,  rgba(217,67,67,1) 11.2%, rgba(242,106,75,1) 100.6% );
 }
 .account-button{
-  color:#DE4331 ;
+  color:#de4231e3 ;
   transition: all .2s ease-in-out;
 }
 .account-button:hover{
   color:#fafafa;
-  background-color: #cf2e1cc4;
+  background-color: #DE4331;
 }
 .account-div{
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 8px;
+}
+.priceCard{
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+h2{
+  color: #333; 
+  max-width: 800px;
+  font-family: 'Poppins' 'sans-serif';
+}
+.about-images{
+  max-width: 75%;
+  max-height: 500px;
+}
+p{
+  color: #333;
+  font-family: 'Poppins' 'sans-serif';
 }
