@@ -11,6 +11,8 @@ const TodoCard = ({ todo }) => {
   const formattedDate = format(new Date(todo.createdAt), "MMMM d, yyyy");
   // for conditional render for edit
   const [edit, setEdit] = useState(false);
+  // check box conditions check
+  const [check, setCheck] = useState(todo.completed);
   // to  update the todo value
   const [updatedTodo, setUpdateTodo] = useState(todo.todo);
   // to get input value
@@ -65,12 +67,38 @@ const TodoCard = ({ todo }) => {
     }
     setEdit(false);
   };
+  const handleCheckboxChange = async (event) => {
+    const completed = event.target.checked;
+    setCheck(completed);
+    try {
+      const response = await axios.patch(
+        `${import.meta.env.VITE_BASE_URL}/todos/${todo._id}`,
+        { todo: updatedTodo, completed },
+        { withCredentials: true }
+      );
+      dispatch(updateTodo(response.data));
+    } catch (error) {
+      console.error("Error updating todo:", error);
+    }
+  };
 
   return (
     <div className="flex flex-col justify-between h-full bg-white shadow-lg rounded-lg p-4 mt-4 border border-gray-200 relative">
-      <span className="text-lg break-words font-semibold">{updatedTodo}</span>
+      <span
+        className={`text-lg break-words font-semibold ${
+          check ? "line-through" : ""
+        }`}
+      >
+        {updatedTodo}
+      </span>
+
       <div className="flex justify-between items-center mt-2">
         <p className="home-p p-2 text-sm">{formattedDate}</p>
+        <input
+          type="checkbox"
+          checked={check}
+          onChange={handleCheckboxChange}
+        />
         <div>
           <i
             className="fa-solid fa-trash cursor-pointer hover:text-red-500 mr-4"

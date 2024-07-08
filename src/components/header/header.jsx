@@ -16,8 +16,6 @@ const Header = () => {
           const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/auth/verify`,{withCredentials:true})
           const verifyLogin = response.data.verified
           dispatch(changeLogginStatus(verifyLogin))
-          // setVerifyLogin(verifyLogin)
-          console.log(verifyLogin);
         } catch (error) {
           console.log(error);
         }
