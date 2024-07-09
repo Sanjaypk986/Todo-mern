@@ -15,6 +15,8 @@ import './index.css'
 import Account from './pages/account';
 import Logout from './pages/logout';
 import Pricing from './pages/pricing';
+import ForgotPassword from './pages/forgotPassword';
+import ResetPassword from './components/passwordReset/resetPassword';
 
 
 const router = createBrowserRouter([
@@ -47,6 +49,11 @@ const router = createBrowserRouter([
         path: "/pricing",
         element: <Pricing />,
       },
+      {
+        path: "/forgot-password",
+        element: <ForgotPassword />,
+      },
+     
 
     ],
   },

@@ -1,13 +1,14 @@
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { changeLogginStatus } from "../../features/login/loginSlice";
 
 export default function LoginForm() {
   const dispatch = useDispatch()
   const navigate = useNavigate();
+  const [forgotPage,setForgot] = useState(false)
   const {
     register,
     handleSubmit,
@@ -24,6 +25,9 @@ export default function LoginForm() {
       console.error("Error logging in:", error);
     }
   };
+  const handleForgot =()=>{
+    setForgot(true)
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col justify-around items-center w-full md:w-3/4 p-3 gap-4 min-h-[300px]">
@@ -46,6 +50,7 @@ export default function LoginForm() {
       {errors.password && (
         <span className="text-red-500 text-center">Password must be at least 8 characters long and include at least one letter and one number</span>
       )}
+      <Link to={'/forgot-password'} className="text-blue-600 text-base" onClick={handleForgot} >Forgot password?</Link>
       <input type="submit" value="Login" className="submit-button py-2 px-5 rounded-lg font-semibold" />
     </form>
   );
