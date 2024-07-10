@@ -11,7 +11,7 @@ const RequestPassword = ({onSubmit}) => {
   
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center justify-center w-full md:w-3/4 p-6 gap-4 min-h-[200px] bg-white rounded-lg ">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col about-card items-center justify-center w-full md:w-3/4 p-6 gap-4 min-h-[200px] bg-white rounded-lg ">
       <input
         {...register("email", {
           required: "Email is required",

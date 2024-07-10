@@ -87,4 +87,8 @@ li{
     .menu-bar{
         display: block;
     }
+    .dark .nav-menu{
+        background-color: #111111bd;
+    }
 }
+

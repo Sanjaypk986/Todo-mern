@@ -27,10 +27,10 @@ const ForgotPassword = () => {
   return (
     <main className="flex items-center justify-center">
       <section className="container mx-auto flex flex-col justify-center items-center">
-        <h2 className="text-3xl sm:text-3xl md:text-4xl font-bold my-2">Forgot <span>Password</span></h2>
-        <div className="w-full md:w-3/4 flex justify-center items-center bg-white p-8 rounded-lg shadow-lg">
+        <h2 className="text-3xl sm:text-3xl md:text-4xl font-bold my-4">Forgot <span>Password</span></h2>
+        <div className="w-full about-card md:w-3/4 flex justify-center items-center bg-white p-8 rounded-lg shadow-lg">
         {loading ? (
-  <div className="loader"></div>
+  <div className="loader "></div>
 ) : resetRequested ? (
   <div className="text-center">
     <p className="text-lg text-green-600">Password reset request successful! Please check your email.</p>

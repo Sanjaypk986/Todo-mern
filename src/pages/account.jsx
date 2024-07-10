@@ -16,7 +16,7 @@ const Account = () => {
           {
             user ? (
                 <>
-                <div className="flex flex-col  justify-center col-span-1 items-center py-8 min-h-[250px] md:min-h-[350px] transition-opacity duration-1000">
+                <div className="flex flex-col account-card account-card justify-center col-span-1 items-center py-8 min-h-[250px] md:min-h-[350px] transition-opacity duration-1000">
             <h3 className="text-xl sm:text-3xl md:text-4xl font-bold my-3">Signup</h3>
             <SignupForm setUser={setUser}/>
           </div>
@@ -47,7 +47,7 @@ const Account = () => {
               Signup
             </Link>
           </div>
-          <div className="flex flex-col justify-center col-span-1 items-center py-8 bg-white min-h-[250px] md:min-h-[350px]"> {/* Set a minimum height here */}
+          <div className="flex flex-col justify-center account-card col-span-1 items-center py-8 bg-white min-h-[250px] md:min-h-[350px]"> {/* Set a minimum height here */}
             <h3 className="text-xl sm:text-3xl md:text-4xl font-bold my-3">Login</h3>
             <LoginForm/>
           </div>

@@ -48,10 +48,10 @@ const ResetPassword = () => {
   };
 
   return (
-    <main className="flex items-center justify-center">
+    <main className="flex items-center justify-center ">
       <section className="container mx-auto flex flex-col justify-center items-center">
         <h2 className="text-3xl sm:text-3xl md:text-4xl font-bold my-2">Reset <span>Password</span></h2>
-        <div className="w-full md:w-3/4 flex justify-center items-center bg-white p-8 rounded-lg shadow-lg">
+        <div className="w-full about-card md:w-3/4 flex justify-center items-center bg-white p-8 rounded-lg shadow-lg">
         {loading ? (
   <div className="loader"></div>
 ) : resetRequested ? (
@@ -65,7 +65,7 @@ const ResetPassword = () => {
         </Link>
   </div>
 ) : (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center justify-center w-full md:w-3/4 p-6 gap-4 min-h-[200px] bg-white rounded-lg ">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex about-card flex-col items-center justify-center w-full md:w-3/4 p-6 gap-4 min-h-[200px] bg-white rounded-lg ">
     <input
       {...register("password", {
         required: "This field is required",

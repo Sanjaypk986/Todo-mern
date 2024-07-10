@@ -83,7 +83,7 @@ const TodoCard = ({ todo }) => {
   };
 
   return (
-    <div className="flex flex-col justify-between h-full bg-white shadow-lg rounded-lg p-4 mt-4 border border-gray-200 relative">
+    <div className="flex about-card flex-col justify-between h-full bg-white shadow-lg rounded-lg p-4 mt-4 border border-gray-200 relative">
       <span
         className={`text-lg break-words font-semibold ${
           check ? "line-through" : ""
@@ -101,11 +101,11 @@ const TodoCard = ({ todo }) => {
         />
         <div>
           <i
-            className="fa-solid fa-trash cursor-pointer hover:text-red-500 mr-4"
+            className="fa-solid fa-trash cursor-pointer   hover:text-red-500 mr-4"
             onClick={handleDelete}
           ></i>
           <i
-            className="fa-solid fa-pen-to-square cursor-pointer hover:text-blue-500"
+            className="fa-solid fa-pen-to-square  cursor-pointer hover:text-blue-500"
             onClick={handleEditInput}
           ></i>
         </div>

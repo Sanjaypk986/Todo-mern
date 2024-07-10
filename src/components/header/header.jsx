@@ -6,16 +6,19 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { changeLogginStatus } from "../../features/login/loginSlice";
 
-const Header = () => {
+const Header = ({ handleTheme, theme }) => {
   const dispatch = useDispatch();
-  const verifyLogin = useSelector(state => state.login.isLoggedIn);
+  const verifyLogin = useSelector((state) => state.login.isLoggedIn);
   const [toggle, setToggle] = useState(false);
   const menuRef = useRef(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/auth/verify`, { withCredentials: true });
+        const response = await axios.get(
+          `${import.meta.env.VITE_BASE_URL}/auth/verify`,
+          { withCredentials: true }
+        );
         const verifyLogin = response.data.verified;
         dispatch(changeLogginStatus(verifyLogin));
       } catch (error) {
@@ -26,7 +29,11 @@ const Header = () => {
     fetchData(); // Initial fetch on component mount
 
     const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target) && !event.target.classList.contains("fa-times")) {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(event.target) &&
+        !event.target.classList.contains("fa-times")
+      ) {
         setToggle(false); // Close the menu if clicked outside of menu or menu-bar and not on the X button
       }
     };
@@ -45,15 +52,21 @@ const Header = () => {
     <header className="p-5 border-b-2">
       <nav className="flex justify-between items-center container py-2 md:px-5 mx-auto font-semibold">
         <span className="whitespace-nowrap text-2xl md:text-2xl font-bold logo">
-          <Link to={'/'} className="tracking-wider text-3xl">
+          <Link to={"/"} className="tracking-wider text-3xl">
             <i className="fa-solid fa-clipboard-list p-1 mr-1 text-xl md:text-2xl"></i>
             Taskly
           </Link>
         </span>
         <div className="menu-bar">
-          <i className={`fas ${toggle ? 'fa-times' : 'fa-bars'}`} onClick={handleMenu}></i>
+          <i
+            className={`fas ${toggle ? "fa-times" : "fa-bars"}`}
+            onClick={handleMenu}
+          ></i>
         </div>
-        <ul className={` ${toggle ? 'nav-menu active' : 'nav-menu'}`} ref={menuRef}>
+        <ul
+          className={` ${toggle ? "nav-menu active" : "nav-menu"}`}
+          ref={menuRef}
+        >
           {MenuData.map((item, index) => (
             <li key={index}>
               <Link to={item.url} className={item.csName}>
@@ -62,16 +75,21 @@ const Header = () => {
               </Link>
             </li>
           ))}
-          {verifyLogin &&
+          {verifyLogin && (
             <li>
-              <Link to={'/logout'} className="nav-links mx-2">
+              <Link to={"/logout"} className="nav-links mx-2">
                 Logout
               </Link>
             </li>
-          }
+          )}
         </ul>
         <div className="flex items-center justify-between gap-5">
-          <i className="fa-regular fa-moon text-xl md:text-2xl"></i>
+          <i
+            className={`text-xl ${
+              theme === "dark" ? "fa-solid fa-sun" : "fa-regular fa-moon"
+            }`}
+            onClick={handleTheme}
+          ></i>
         </div>
       </nav>
     </header>

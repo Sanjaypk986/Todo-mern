@@ -48,7 +48,7 @@ const TodoList = () => {
             </div>
           </>
         ) : (
-          <div className="my-3 sm:my-4 bg-white sm:py-4 px-4 sm:px-6 lg:px-8 rounded-md flex  flex-col jusitfy-center items-center">
+          <div className="my-3 sm:my-4  sm:py-4 px-4 sm:px-6 lg:px-8 rounded-md flex  flex-col jusitfy-center items-center">
             <h2 className="text-xl sm:text-3xl md:text-4xl font-bold my-3 pb-2">
               Welcome to <span>Taskly</span>
             </h2>
