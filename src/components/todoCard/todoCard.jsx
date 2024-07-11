@@ -2,10 +2,12 @@ import axios from "axios";
 import React, { useRef, useState } from "react";
 import "./todoCard.css";
 import { format } from "date-fns";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteTodo, updateTodo } from "../../features/todo/todoSlice";
+import { setLoading } from "../../features/loader/loaderSlice";
 
 const TodoCard = ({ todo }) => {
+  const isLoading = useSelector(state=>state.loader.loading)
   const dispatch = useDispatch();
   // todo adiing date
   const formattedDate = format(new Date(todo.createdAt), "MMMM d, yyyy");
@@ -15,6 +17,7 @@ const TodoCard = ({ todo }) => {
   const [check, setCheck] = useState(todo.completed);
   // to  update the todo value
   const [updatedTodo, setUpdateTodo] = useState(todo.todo);
+
   // to get input value
   const updateRef = useRef();
   // function for delete
@@ -44,9 +47,11 @@ const TodoCard = ({ todo }) => {
   };
   // handle edit function run when changed data submit
   const handleEdit = async () => {
+    dispatch(setLoading(true))
     // save changed todo in variable
     const data = {
       todo: updatedTodo,
+      completed : check
     };
     try {
       // fetch update api and pass data as req.body
@@ -62,7 +67,9 @@ const TodoCard = ({ todo }) => {
           updatedTodo,
         })
       );
+      dispatch(setLoading(false))
     } catch (error) {
+      dispatch(setLoading(false))
       console.error("Error updating todo:", error);
     }
     setEdit(false);
@@ -111,6 +118,9 @@ const TodoCard = ({ todo }) => {
         </div>
       </div>
       {edit && (
+        isLoading ?
+        <div className="loader"></div>
+        :
         <div className="edit-box flex flex-col justify-center items-center gap-2 h-full  bg-white shadow-lg rounded-lg p-4">
           <input
             type="text"
@@ -121,6 +131,7 @@ const TodoCard = ({ todo }) => {
           />
           <i className="fa-solid fa-square-check" onClick={handleEdit}></i>
         </div>
+
       )}
     </div>
   );

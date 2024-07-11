@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import RequestPassword from '../components/passwordReset/requestPassword';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { setLoading } from '../features/loader/loaderSlice';
 
 
 const ForgotPassword = () => {
   const [resetRequested, setResetRequested] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const isLoading = useSelector(state=>state.loader.loading)
+  const dispatch = useDispatch()
 
   const onSubmit = async (data) => {
-    setLoading(true);
+    dispatch(setLoading(true))
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/auth/request-reset`,
@@ -16,11 +19,11 @@ const ForgotPassword = () => {
       );
       console.log(response);
       setResetRequested(true);
-      setLoading(false);
+      dispatch(setLoading(false))
     } catch (error) {
       console.error("Error in forgot password:", error);
       alert("An error occurred. Please try again.");
-      setLoading(false);
+      dispatch(setLoading(false))
     }
   };
 
@@ -29,7 +32,7 @@ const ForgotPassword = () => {
       <section className="container mx-auto flex flex-col justify-center items-center">
         <h2 className="text-3xl sm:text-3xl md:text-4xl font-bold my-4">Forgot <span>Password</span></h2>
         <div className="w-full about-card md:w-3/4 flex justify-center items-center bg-white p-8 rounded-lg shadow-lg">
-        {loading ? (
+        {isLoading ? (
   <div className="loader "></div>
 ) : resetRequested ? (
   <div className="text-center">

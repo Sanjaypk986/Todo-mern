@@ -1,18 +1,20 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
+import { setLoading } from "../../features/loader/loaderSlice";
 
 const ResetPassword = () => {
     const [resetRequested, setResetRequested] = useState(false);
-    // for loader
-    const [loading, setLoading] = useState(false);
     // fetches current URL details
   const location = useLocation();
   // to store token from url
   const [token, setToken] = useState("");
   // to show reset message
   const [message, setMessage] = useState("");
+  const isLoading = useSelector(state=>state.loader.loading)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     // to get url value after ? mark
@@ -35,14 +37,14 @@ const ResetPassword = () => {
   const password = watch("password");
 
   const onSubmit = async (data) => {
-    setLoading(true);
+    dispatch(setLoading(true))
     const newPassword = data.password
     try {
       const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/auth/reset-password`, { token ,newPassword });
       setResetRequested(true);
-      setLoading(false);
+      dispatch(setLoading(false))
     } catch (error) {
-        setLoading(false);
+        dispatch(setLoading(false))
         setMessage(error.response.data); // Display error message from backend
     }
   };
@@ -52,7 +54,7 @@ const ResetPassword = () => {
       <section className="container mx-auto flex flex-col justify-center items-center">
         <h2 className="text-3xl sm:text-3xl md:text-4xl font-bold my-2">Reset <span>Password</span></h2>
         <div className="w-full about-card md:w-3/4 flex justify-center items-center bg-white p-8 rounded-lg shadow-lg">
-        {loading ? (
+        {isLoading ? (
   <div className="loader"></div>
 ) : resetRequested ? (
   <div className="text-center">
