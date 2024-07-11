@@ -136,7 +136,7 @@ p {
 .dark body {
   background-color: #111;
 }
-.dark .about-card{
+.dark .about-card,.dark .edit-box{
   background-color: #111;
   box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
 }
