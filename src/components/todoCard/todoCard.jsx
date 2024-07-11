@@ -4,10 +4,10 @@ import "./todoCard.css";
 import { format } from "date-fns";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteTodo, updateTodo } from "../../features/todo/todoSlice";
-import { setLoading } from "../../features/loader/loaderSlice";
+import { setLoadingA } from "../../features/loader/loaderSlice";
 
 const TodoCard = ({ todo }) => {
-  const isLoading = useSelector(state=>state.loader.loading)
+  const isLoading = useSelector(state=>state.loader.loadingA)
   const dispatch = useDispatch();
   // todo adiing date
   const formattedDate = format(new Date(todo.createdAt), "MMMM d, yyyy");
@@ -47,7 +47,7 @@ const TodoCard = ({ todo }) => {
   };
   // handle edit function run when changed data submit
   const handleEdit = async () => {
-    dispatch(setLoading(true))
+    dispatch(setLoadingA(true))
     // save changed todo in variable
     const data = {
       todo: updatedTodo,
@@ -67,9 +67,9 @@ const TodoCard = ({ todo }) => {
           updatedTodo,
         })
       );
-      dispatch(setLoading(false))
+      dispatch(setLoadingA(false))
     } catch (error) {
-      dispatch(setLoading(false))
+      dispatch(setLoadingA(false))
       console.error("Error updating todo:", error);
     }
     setEdit(false);

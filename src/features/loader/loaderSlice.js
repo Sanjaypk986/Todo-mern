@@ -1,18 +1,22 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 export const loaderSlice = createSlice({
   name: 'loader',
   initialState: {
-    loading: false
+    loading: false,
+    loadingA: false,
   },
   reducers: {
     setLoading: (state, action) => {
-      state.loading = action.payload
-    }
-  }
-})
+      state.loadingA = action.payload;
+    },
+    setLoadingA: (state, action) => {
+      state.loadingB = action.payload;
+    },
+  },
+});
 
 // Action creators are generated for each case reducer function
-export const { setLoading} = loaderSlice.actions
+export const { setLoadingA, setLoading } = loaderSlice.actions;
 
-export default loaderSlice.reducer
+export default loaderSlice.reducer;
