@@ -6,8 +6,8 @@ import { setLoading } from "../../features/loader/loaderSlice";
 
 export default function SignupForm({ setUser }) {
   const [errorMessage, setErrorMessage] = useState("");
-  const isLoading = useSelector(state=>state.loader.loading)
-  const dispatch = useDispatch()
+  const isLoading = useSelector((state) => state.loader.loading);
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -17,16 +17,16 @@ export default function SignupForm({ setUser }) {
   } = useForm();
 
   const onSubmit = async (data) => {
-    dispatch(setLoading(true))
+    dispatch(setLoading(true));
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/users`,
         data
       );
       setUser(false);
-      dispatch(setLoading(false))
+      dispatch(setLoading(false));
     } catch (error) {
-      dispatch(setLoading(false))
+      dispatch(setLoading(false));
       if (error.response && error.response.status === 409) {
         setErrorMessage("Email already exists");
       } else {
@@ -67,8 +67,10 @@ export default function SignupForm({ setUser }) {
       <input
         {...register("password", {
           required: "This field is required",
-          pattern:
-            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+          minLength: {
+            value: 8,
+            message: "Password must be at least 8 characters long",
+          },
         })}
         type="password"
         placeholder="Password"
@@ -76,19 +78,25 @@ export default function SignupForm({ setUser }) {
       />
       {errors.password && (
         <span className="text-red-500 text-center">
-          Password must be at least 8 characters long and include at least one
-          letter, one number, and one special character
+          {errors.password.message}
         </span>
       )}
       <input
         {...register("confirmPassword", {
           required: "This field is required",
-          validate: (value) => value === password || "Passwords do not match",
+          validate: (value) =>
+            value === watch("password") || "Passwords do not match",
         })}
         type="password"
         placeholder="Confirm Password"
         className="w-3/4 text-md shadow-sm px-4 py-2 border-2 bg-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent"
       />
+      {errors.confirmPassword && (
+        <span className="text-red-500 text-center">
+          {errors.confirmPassword.message}
+        </span>
+      )}
+
       {errors.confirmPassword && (
         <span className="text-red-500">{errors.confirmPassword.message}</span>
       )}

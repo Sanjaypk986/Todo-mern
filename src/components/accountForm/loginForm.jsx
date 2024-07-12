@@ -7,7 +7,7 @@ import { changeLogginStatus } from "../../features/login/loginSlice";
 import { setLoading } from "../../features/loader/loaderSlice";
 
 export default function LoginForm() {
-  const isLoading = useSelector(state=>state.loader.loading)
+  const isLoading = useSelector((state) => state.loader.loading);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
@@ -18,7 +18,7 @@ export default function LoginForm() {
   } = useForm();
 
   const onSubmit = async (data) => {
-    dispatch(setLoading(true))
+    dispatch(setLoading(true));
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/auth/login`,
@@ -26,10 +26,10 @@ export default function LoginForm() {
         { withCredentials: true }
       );
       dispatch(changeLogginStatus(true));
-      dispatch(setLoading(false))
+      dispatch(setLoading(false));
       navigate("/todolist");
     } catch (error) {
-      dispatch(setLoading(false))
+      dispatch(setLoading(false));
       console.error("Error logging in:", error);
     }
   };
@@ -54,8 +54,10 @@ export default function LoginForm() {
       <input
         {...register("password", {
           required: "This field is required",
-          pattern:
-            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+          minLength: {
+            value: 8,
+            message: "Password must be at least 8 characters long",
+          },
         })}
         type="password"
         placeholder="Password"
@@ -63,8 +65,7 @@ export default function LoginForm() {
       />
       {errors.password && (
         <span className="text-red-500 text-center">
-          Password must be at least 8 characters long and include at least one
-          letter and one number
+          {errors.password.message}
         </span>
       )}
       <Link to={"/forgot-password"} className="text-blue-600 text-base">
