@@ -3,8 +3,10 @@ import Header from "../components/header/header";
 import { Outlet } from "react-router-dom";
 import Footer from "../components/footer/footer";
 import Cookies from "js-cookie";
+import useScrollToTop from "../hooks/useScrollToTop";
 
 const Root = () => {
+  useScrollToTop();
   const [theme, setTheme] = useState(() => Cookies.get("theme") || "light");
   useEffect(() => {
     if (theme === "dark") {
